@@ -2,7 +2,40 @@
 
 script_parent_dir=$(dirname "$0")
 current_datetime=$(date +"%Y-%m-%d_%H-%M-%S")
+target_dir="$script_parent_dir/$current_datetime"
 
+echo -en $'\E[32m'
+echo $''
+echo $'              ,***                                             ****'             
+echo $'                ***                                           ***'               
+echo $'                 ****                                       ****'                
+echo $'                   ***        ,*******************,        ***'                  
+echo $'                    *****************************************'                   
+echo $'                   *******************************************'                  
+echo $'               ***************************************************'              
+echo $'            *********************************************************'           
+echo $'          *************************************************************'         
+echo $'        *****************************************************************'       
+echo $'      **************    *********************************    **************'     
+echo $'     **************      *******************************      **************'    
+echo $'    ****************     *******************************,    ****************'   
+echo $'   ***************************************************************************'  
+echo $'  *****************************************************************************' 
+echo $' *******************************************************************************'
+echo $' *******************************************************************************'
+
+
+echo -en $'\E[97m'
+echo $''
+echo $' █████╗ ███╗   ██╗ ██████╗ ███████╗██╗         ███╗   ███╗ █████╗ ██╗███╗   ██╗'
+echo $'██╔══██╗████╗  ██║██╔════╝ ██╔════╝██║         ████╗ ████║██╔══██╗██║████╗  ██║'
+echo $'███████║██╔██╗ ██║██║  ███╗█████╗  ██║         ██╔████╔██║███████║██║██╔██╗ ██║'
+echo $'██╔══██║██║╚██╗██║██║   ██║██╔══╝  ██║         ██║╚██╔╝██║██╔══██║██║██║╚██╗██║'
+echo $'██║  ██║██║ ╚████║╚██████╔╝███████╗███████╗    ██║ ╚═╝ ██║██║  ██║██║██║ ╚████║'
+echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚══════╝    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝'
+
+#ANSI SHADOW
+#https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=ANGEL%20MAIN
 while true; do
     echo "Choose an option:"
     echo "1) Run ./Android_Active.sh"
@@ -14,14 +47,18 @@ while true; do
 
     case $choice in
         1)
-            ./Android_Active.sh
+            mkdir -p "$target_dir/Active_Data" || { echo "Failed to create directory"; exit 1; }
+            ./Android_Active.sh $target_dir/Active_Data
             ;;
         2)
-            ./Android_Inactive.sh
+            mkdir -p "$target_dir/InActive_Data" || { echo "Failed to create directory"; exit 1; }
+            ./Android_Inactive.sh $target_dir/InActive_Data
             ;;
         3)
-            ./Android_Active.sh
-            ./Android_Inactive.sh
+            mkdir -p "$target_dir/Active_Data" || { echo "Failed to create directory"; exit 1; }
+            ./Android_Active.sh $target_dir/Active_Data
+            mkdir -p "$target_dir/InActive_Data" || { echo "Failed to create directory"; exit 1; }
+            ./Android_Inactive.sh $target_dir/InActive_Data
             ;;
         4)
             echo "Exiting..."
