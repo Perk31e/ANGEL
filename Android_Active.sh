@@ -353,9 +353,9 @@ while true; do
             echo "Current running processes:"
             ps -A
 
-            echo "Enter package names (comma separated without space): "
+            echo "Enter package names separated by commas followed by a space. For example: com.android.test1, com.android.test2"
             read specified_packages
-            IFS=','
+            IFS=', '
             selected_packages=($specified_packages)
             for package in "${selected_packages[@]}"; do
                 package_info=$(dumpsys package $package)
