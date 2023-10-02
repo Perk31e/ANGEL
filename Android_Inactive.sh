@@ -171,91 +171,98 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     echo "**********************************************"
     echo
 
-echo "This script collects data only for the mobile browsers Chrome, Firefox, Tor, Naver Whale, Opera, and Vivaldi."
-Browser_Info_File_Dir="$target_dir/05_Browser_Info"
-mkdir -p "$Browser_Info_File_Dir" || { echo "Failed to create main directory"; exit 1; }
+    echo "This script collects data only for the mobile browsers Chrome, Firefox, Tor, Naver Whale, Opera, and Vivaldi."
+    echo
+    echo
+    Browser_Info_File_Dir="$target_dir/05_Browser_Info"
+    mkdir -p "$Browser_Info_File_Dir" || { echo "Failed to create main directory"; exit 1; }
 
-# List of browsers
-BROWSERS=("com.android.chrome" "org.mozilla.firefox" "com.opera.browser" "com.naver.whale" "org.torproject.torbrowser" "com.vivaldi.browser")
+    # List of browsers
+    BROWSERS=("com.android.chrome" "org.mozilla.firefox" "com.opera.browser" "com.naver.whale" "org.torproject.torbrowser" "com.vivaldi.browser")
 
+    # Counter for skipped browsers
+    skipped_browsers=0
 
-# Loop through each browser and dump data
-for BROWSER_PACKAGE in "${BROWSERS[@]}"
-do
-    # First, check if the main directory of the browser exists.
-    if [ ! -d "/data/data/$BROWSER_PACKAGE" ]; then
-        echo "Directory for $BROWSER_PACKAGE not found. Skipping..."
-        continue
-    fi
-
-    # Firefox and Tor profile path
-    if [ "$BROWSER_PACKAGE" == "org.mozilla.firefox" ] || [ "$BROWSER_PACKAGE" == "org.torproject.torbrowser" ]; then 
-        if [ ! -d "/data/data/$BROWSER_PACKAGE/files/mozilla" ]; then
-            echo "Mozilla directory for $BROWSER_PACKAGE not found. Skipping..."
+    # Loop through each browser and dump data
+    for BROWSER_PACKAGE in "${BROWSERS[@]}"
+    do
+        # First, check if the main directory of the browser exists.
+        if [ ! -d "/data/data/$BROWSER_PACKAGE" ]; then
+            echo "Directory for $BROWSER_PACKAGE not found. Skipping..."
+            ((skipped_browsers++))
             continue
         fi
-        PROFILE_NAME=$(ls /data/data/$BROWSER_PACKAGE/files/mozilla | grep .default)
-        PROFILE_PATH="/data/data/$BROWSER_PACKAGE/files/mozilla/$PROFILE_NAME"
-        HISTORY_DB_PATH="$PROFILE_PATH/places.sqlite"
-        COOKIES_DB_PATH="$PROFILE_PATH/cookies.sqlite"
-        CACHE_DIR_PATH="/data/data/$BROWSER_PACKAGE/cache"
-    fi
 
-   #chrome
-   if [ "$BROWSER_PACKAGE" == "com.android.chrome" ]; then 
-        HISTORY_DB_PATH="/data/data/com.android.chrome/app_chrome/Default/History"
-        COOKIES_DB_PATH="/data/data/com.android.chrome/app_chrome/Default/Cookies"
-        CACHE_DIR_PATH="/data/data/com.android.chrome/cache"
-    fi
+        # Firefox and Tor profile path
+        if [ "$BROWSER_PACKAGE" == "org.mozilla.firefox" ] || [ "$BROWSER_PACKAGE" == "org.torproject.torbrowser" ]; then 
+            if [ ! -d "/data/data/$BROWSER_PACKAGE/files/mozilla" ]; then
+                echo "Mozilla directory for $BROWSER_PACKAGE not found. Skipping..."
+                continue
+            fi
+            PROFILE_NAME=$(ls /data/data/$BROWSER_PACKAGE/files/mozilla | grep .default)
+            PROFILE_PATH="/data/data/$BROWSER_PACKAGE/files/mozilla/$PROFILE_NAME"
+            HISTORY_DB_PATH="$PROFILE_PATH/places.sqlite"
+            COOKIES_DB_PATH="$PROFILE_PATH/cookies.sqlite"
+            CACHE_DIR_PATH="/data/data/$BROWSER_PACKAGE/cache"
+        fi
 
-    #opera
-    if [ "$BROWSER_PACKAGE" == "com.opera.browser" ]; then 
-        HISTORY_DB_PATH="/data/data/com.opera.browser/app_opera/History"
-        COOKIES_DB_PATH="/data/data/com.opera.browser/app_opera/cookies"
-        CACHE_DIR_PATH="/data/data/com.opera.browser/cache"
+       #chrome
+        if [ "$BROWSER_PACKAGE" == "com.android.chrome" ]; then 
+            HISTORY_DB_PATH="/data/data/com.android.chrome/app_chrome/Default/History"
+            COOKIES_DB_PATH="/data/data/com.android.chrome/app_chrome/Default/Cookies"
+            CACHE_DIR_PATH="/data/data/com.android.chrome/cache"
+        fi
 
-    fi
+        #opera
+        if [ "$BROWSER_PACKAGE" == "com.opera.browser" ]; then 
+            HISTORY_DB_PATH="/data/data/com.opera.browser/app_opera/History"
+            COOKIES_DB_PATH="/data/data/com.opera.browser/app_opera/cookies"
+            CACHE_DIR_PATH="/data/data/com.opera.browser/cache"
+        fi
 
-   #whale
-    if [ "$BROWSER_PACKAGE" == "com.naver.whale" ]; then 
-        HISTORY_DB_PATH="/data/data/com.naver.whale/app_whale/Default/History"
-        COOKIES_DB_PATH="/data/data/com.naver.whale/app_whale/Default/Cookies"
-        CACHE_DIR_PATH="/data/data/com.naver.whale/cache"
+        #whale
+        if [ "$BROWSER_PACKAGE" == "com.naver.whale" ]; then 
+            HISTORY_DB_PATH="/data/data/com.naver.whale/app_whale/Default/History"
+            COOKIES_DB_PATH="/data/data/com.naver.whale/app_whale/Default/Cookies"
+            CACHE_DIR_PATH="/data/data/com.naver.whale/cache"
+        fi
 
-    fi
+        #vivaldi
+        if [ "$BROWSER_PACKAGE" == "com.vivaldi.browser" ]; then 
+            HISTORY_DB_PATH="/data/data/com.vivaldi.browser/app_chrome/Default/History"
+            COOKIES_DB_PATH="/data/data/com.vivaldi.browser/app_chrome/Default/Cookies"
+            CACHE_DIR_PATH="/data/data/com.vivaldi.browser/cache"
+        fi
 
-    #vivaldi
-    if [ "$BROWSER_PACKAGE" == "com.vivaldi.browser" ]; then 
-        HISTORY_DB_PATH="/data/data/com.vivaldi.browser/app_chrome/Default/History"
-        COOKIES_DB_PATH="/data/data/com.vivaldi.browser/app_chrome/Default/Cookies"
-        CACHE_DIR_PATH="/data/data/com.vivaldi.browser/cache"
+        DEST_HISTORY_PATH="$Browser_Info_File_Dir/${BROWSER_PACKAGE}_HistoryDB"
+        DEST_COOKIES_PATH="$Browser_Info_File_Dir/${BROWSER_PACKAGE}_CookiesDB"
+        DEST_CACHE_DIR_PATH="$Browser_Info_File_Dir/${BROWSER_PACKAGE}_CacheDir"
 
-    fi
-
-    DEST_HISTORY_PATH="$Browser_Info_File_Dir/${BROWSER_PACKAGE}_HistoryDB"
-    DEST_COOKIES_PATH="$Browser_Info_File_Dir/${BROWSER_PACKAGE}_CookiesDB"
-    DEST_CACHE_DIR_PATH="$Browser_Info_File_Dir/${BROWSER_PACKAGE}_CacheDir"
-
-    mkdir -p "$DEST_HISTORY_PATH" || { echo "Failed to create history directory"; exit 1; }
-    mkdir -p "$DEST_COOKIES_PATH" || { echo "Failed to create cookies directory"; exit 1; }
-    mkdir -p "$DEST_CACHE_DIR_PATH" || { echo "Failed to create cache directory"; exit 1; }
+        mkdir -p "$DEST_HISTORY_PATH" || { echo "Failed to create history directory"; exit 1; }
+        mkdir -p "$DEST_COOKIES_PATH" || { echo "Failed to create cookies directory"; exit 1; }
+        mkdir -p "$DEST_CACHE_DIR_PATH" || { echo "Failed to create cache directory"; exit 1; }
 
 
 
-    if [ -f "$HISTORY_DB_PATH" ]; then
-        cp  "$HISTORY_DB_PATH" "$DEST_HISTORY_PATH/"
-    fi
+        if [ -f "$HISTORY_DB_PATH" ]; then
+            cp  "$HISTORY_DB_PATH" "$DEST_HISTORY_PATH/"
+        fi
 
-    if [ -f "$COOKIES_DB_PATH" ]; then
-        cp  "$COOKIES_DB_PATH" "$DEST_COOKIES_PATH/"
-    fi
+        if [ -f "$COOKIES_DB_PATH" ]; then
+            cp  "$COOKIES_DB_PATH" "$DEST_COOKIES_PATH/"
+        fi
 
-    if [ -d "$CACHE_DIR_PATH" ]; then
-        cp -r "$CACHE_DIR_PATH" "$DEST_CACHE_DIR_PATH/"
-    fi
+        if [ -d "$CACHE_DIR_PATH" ]; then
+            cp -r "$CACHE_DIR_PATH" "$DEST_CACHE_DIR_PATH/"
+        fi
    
-done
+    done
 
+    # Calculate actual number of browsers collected
+    actual_browsers_count=$(( ${#BROWSERS[@]} - $skipped_browsers ))
+
+    echo "Total browsers collected: $actual_browsers_count out of ${#BROWSERS[@]}"
+    echo
     echo "Browser Data dump completed."
 }
 
