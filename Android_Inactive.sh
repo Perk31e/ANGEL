@@ -292,19 +292,45 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
         cp -Rn "$dir" "$cache_dump_path" 2>/dev/null
     done
 
+    # Display '/data/local/tmp' and get user input for exclusion
+    echo "Current contents of /data/local/tmp:"
+    ls -al /data/local/tmp
+    echo "Enter directories to exclude (comma followed by space-separated):"
+    read exclude_dirs_input
+
+    # Parsing the `, ` (comma and space) separated list
+    OLD_IFS=$IFS
+    IFS=',' 
+    set -- $exclude_dirs_input
+    EXCLUDE_DIRS=()
+    for dir in "$@"; do
+        EXCLUDE_DIRS+=("$(echo $dir | xargs)")  # xargs trims the leading/trailing spaces
+    done
+    IFS=$OLD_IFS
+
     # Copy '/data/local/tmp' to localtmp_dump_path excluding specific directories and files
     for item in /data/local/tmp/*; do
+        # Check if the item is one of the predefined items to skip
         case "$item" in
-            "/data/local/tmp/Android_main.sh" | "/data/local/tmp/Android_Active.sh" | "/data/local/tmp/Android_Inactive.sh" ) 
-                # Do not copy this item
-                ;;
-            $script_parent_dir/$current_datetime*)
-                 # Do not copy this item and its children
-                ;;
-            *)
-                cp -Rn "$item" "$localtmp_dump_path/" 2>/dev/null
+            "/data/local/tmp/Android_main.sh" | "/data/local/tmp/Android_Active.sh" | "/data/local/tmp/Android_Inactive.sh")
+                continue
                 ;;
         esac
+
+        # Check and skip copying if the item is one of the excluded directories
+        skip_copy=false
+        for exclude_dir in "${EXCLUDE_DIRS[@]}"; do
+            if [[ "$item" == "/data/local/tmp/$exclude_dir" ]]; then
+                skip_copy=true
+                break
+            fi
+        done
+
+        if $skip_copy; then
+            continue
+        fi
+
+        cp -Rn "$item" "$localtmp_dump_path/" 2>/dev/null
     done
 
     echo "Temp File Data Dump Success"
@@ -347,6 +373,9 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     echo "\n!ShortCut Done!\n"
 }
 
+09_CALL_MESSAGE_MESSENGER_PHONE_INFORMATION() {
+
+}
 selected_options=""
 
 while true; do
