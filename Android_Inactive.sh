@@ -260,9 +260,9 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
 
     # Calculate actual number of browsers collected
     actual_browsers_count=$(( ${#BROWSERS[@]} - $skipped_browsers ))
-
-    echo "Total browsers collected: $actual_browsers_count out of ${#BROWSERS[@]}"
     echo
+    echo
+    echo "Total browsers collected: $actual_browsers_count out of ${#BROWSERS[@]}"
     echo "Browser Data dump completed."
 }
 
