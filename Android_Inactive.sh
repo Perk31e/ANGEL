@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/system/bin/sh
 
 # check system architecture
 getprop ro.product.cpu.abi
@@ -162,6 +162,102 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     echo "Recycle Bin Data Dump Success"
 }
 
+05_Browser_Info_File() {
+    echo
+    echo "**********************************************"
+    echo
+    echo "             05 Browser Info "
+    echo
+    echo "**********************************************"
+    echo
+
+Browser_Info_File_Dir="$target_dir/05_Browser_Info"
+mkdir -p "$Browser_Info_File_Dir" || { echo "Failed to create main directory"; exit 1; }
+
+# List of browsers
+BROWSERS=("com.android.chrome" "org.mozilla.firefox" "com.opera.browser" "com.naver.whale" "org.torproject.torbrowser" "com.vivaldi.browser")
+
+
+# Loop through each browser and dump data
+for BROWSER_PACKAGE in "${BROWSERS[@]}"
+do
+    # First, check if the main directory of the browser exists.
+    if [ ! -d "/data/data/$BROWSER_PACKAGE" ]; then
+        echo "Directory for $BROWSER_PACKAGE not found. Skipping..."
+        continue
+    fi
+
+    # Firefox and Tor profile path
+    if [ "$BROWSER_PACKAGE" == "org.mozilla.firefox" ] || [ "$BROWSER_PACKAGE" == "org.torproject.torbrowser" ]; then 
+        if [ ! -d "/data/data/$BROWSER_PACKAGE/files/mozilla" ]; then
+            echo "Mozilla directory for $BROWSER_PACKAGE not found. Skipping..."
+            continue
+        fi
+        PROFILE_NAME=$(ls /data/data/$BROWSER_PACKAGE/files/mozilla | grep .default)
+        PROFILE_PATH="/data/data/$BROWSER_PACKAGE/files/mozilla/$PROFILE_NAME"
+        HISTORY_DB_PATH="$PROFILE_PATH/places.sqlite"
+        COOKIES_DB_PATH="$PROFILE_PATH/cookies.sqlite"
+        CACHE_DIR_PATH="/data/data/$BROWSER_PACKAGE/cache"
+    fi
+
+   #chrome
+   if [ "$BROWSER_PACKAGE" == "com.android.chrome" ]; then 
+        HISTORY_DB_PATH="/data/data/com.android.chrome/app_chrome/Default/History"
+        COOKIES_DB_PATH="/data/data/com.android.chrome/app_chrome/Default/Cookies"
+        CACHE_DIR_PATH="/data/data/com.android.chrome/cache"
+    fi
+
+    #opera
+    if [ "$BROWSER_PACKAGE" == "com.opera.browser" ]; then 
+        HISTORY_DB_PATH="/data/data/com.opera.browser/app_opera/History"
+        COOKIES_DB_PATH="/data/data/com.opera.browser/app_opera/cookies"
+        CACHE_DIR_PATH="/data/data/com.opera.browser/cache"
+
+    fi
+
+   #whale
+    if [ "$BROWSER_PACKAGE" == "com.naver.whale" ]; then 
+        HISTORY_DB_PATH="/data/data/com.naver.whale/app_whale/Default/History"
+        COOKIES_DB_PATH="/data/data/com.naver.whale/app_whale/Default/Cookies"
+        CACHE_DIR_PATH="/data/data/com.naver.whale/cache"
+
+    fi
+
+    #vivaldi
+    if [ "$BROWSER_PACKAGE" == "com.vivaldi.browser" ]; then 
+        HISTORY_DB_PATH="/data/data/com.vivaldi.browser/app_chrome/Default/History"
+        COOKIES_DB_PATH="/data/data/com.vivaldi.browser/app_chrome/Default/Cookies"
+        CACHE_DIR_PATH="/data/data/com.vivaldi.browser/cache"
+
+    fi
+
+    DEST_HISTORY_PATH="$Browser_Info_File_Dir/${BROWSER_PACKAGE}_HistoryDB"
+    DEST_COOKIES_PATH="$Browser_Info_File_Dir/${BROWSER_PACKAGE}_CookiesDB"
+    DEST_CACHE_DIR_PATH="$Browser_Info_File_Dir/${BROWSER_PACKAGE}_CacheDir"
+
+    mkdir -p "$DEST_HISTORY_PATH" || { echo "Failed to create history directory"; exit 1; }
+    mkdir -p "$DEST_COOKIES_PATH" || { echo "Failed to create cookies directory"; exit 1; }
+    mkdir -p "$DEST_CACHE_DIR_PATH" || { echo "Failed to create cache directory"; exit 1; }
+
+
+
+    if [ -f "$HISTORY_DB_PATH" ]; then
+        cp  "$HISTORY_DB_PATH" "$DEST_HISTORY_PATH/"
+    fi
+
+    if [ -f "$COOKIES_DB_PATH" ]; then
+        cp  "$COOKIES_DB_PATH" "$DEST_COOKIES_PATH/"
+    fi
+
+    if [ -d "$CACHE_DIR_PATH" ]; then
+        cp -r "$CACHE_DIR_PATH" "$DEST_CACHE_DIR_PATH/"
+    fi
+   
+done
+
+    echo "Browser Data dump completed."
+}
+
 06_Temp_File() {
     echo
     echo "**********************************************"
@@ -237,6 +333,7 @@ while true; do
     echo "2: System, User, Application Setting Information"
     echo "3: Log Files"
     echo "4: Recycle Bin"
+    echo "5: Browser Info"
     echo "6: Temp Files"
     echo "7: External Storage"
     echo "8: Shortcut"
@@ -249,7 +346,7 @@ while true; do
         echo "Exiting."
         exit 0
     elif [ "$main_choice" == "a" ]; then
-        main_choice="1,2,3,4,6,7,8"
+        main_choice="1,2,3,4,5,6,7,8"
     fi
 
     old_ifs=$IFS
@@ -265,6 +362,7 @@ while true; do
             2) 02_System_User_Application_setting_Info; selected_options="${selected_options}2," ;;
             3) 03_Log_Files; selected_options="${selected_options}3," ;;
             4) 04_Recycle_Bin; selected_options="${selected_options}4," ;;
+            5) 05_Browser_Info_File; selected_options="${selected_options}5," ;;
             6) 06_Temp_File; selected_options="${selected_options}6," ;;
             7) 07_External_Storage; selected_options="${selected_options}7," ;;
             8) 08_Shortcut; selected_options="${selected_options}8," ;;
@@ -273,7 +371,7 @@ while true; do
     done
 
     displayed_options=""
-    for option in 1 2 3 4 6 7 8; do
+    for option in 1 2 3 4 5 6 7 8; do
         if echo "$selected_options" | grep -q "$option,"; then
             displayed_options="${displayed_options}${option},"
         fi

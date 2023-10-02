@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/system/bin/sh
 
 # check system architecture
 getprop ro.product.cpu.abi
