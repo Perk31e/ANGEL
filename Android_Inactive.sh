@@ -295,8 +295,11 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     # Copy '/data/local/tmp' to localtmp_dump_path excluding specific directories and files
     for item in /data/local/tmp/*; do
         case "$item" in
-            "/data/local/tmp/Android_main.sh" | "/data/local/tmp/Android_Active.sh" | "/data/local/tmp/Android_Inactive.sh" | "$script_parent_dir/$current_datetime")
+            "/data/local/tmp/Android_main.sh" | "/data/local/tmp/Android_Active.sh" | "/data/local/tmp/Android_Inactive.sh" ) 
                 # Do not copy this item
+                ;;
+            $script_parent_dir/$current_datetime*)
+                 # Do not copy this item and its children
                 ;;
             *)
                 cp -Rn "$item" "$localtmp_dump_path/" 2>/dev/null
