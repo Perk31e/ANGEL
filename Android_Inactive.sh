@@ -288,10 +288,21 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     mkdir -p "$localtmp_dump_path"
 
     # Find 'cache' directories and copy to cache_dump_path
-    find /  -type d -name '*cache*' -exec cp -Rn {} "$cache_dump_path" \; 2>/dev/null
+    find / -type d -name '*cache*' 2>/dev/null | while read dir; do
+        cp -Rn "$dir" "$cache_dump_path" 2>/dev/null
+    done
 
-    # Copy '/data/local/tmp' to localtmp_dump_path
-    cp -Rn /data/local/tmp/ "$localtmp_dump_path"
+    # Copy '/data/local/tmp' to localtmp_dump_path excluding specific directories and files
+    for item in /data/local/tmp/*; do
+        case "$item" in
+            "/data/local/tmp/Android_main.sh" | "/data/local/tmp/Android_Active.sh" | "/data/local/tmp/Android_Inactive.sh" | "$script_parent_dir/$current_datetime")
+                # Do not copy this item
+                ;;
+            *)
+                cp -Rn "$item" "$localtmp_dump_path/" 2>/dev/null
+                ;;
+        esac
+    done
 
     echo "Temp File Data Dump Success"
 }
