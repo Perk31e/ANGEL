@@ -171,6 +171,7 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     echo "**********************************************"
     echo
 
+echo "This script collects data only for the mobile browsers Chrome, Firefox, Tor, Naver Whale, Opera, and Vivaldi."
 Browser_Info_File_Dir="$target_dir/05_Browser_Info"
 mkdir -p "$Browser_Info_File_Dir" || { echo "Failed to create main directory"; exit 1; }
 
