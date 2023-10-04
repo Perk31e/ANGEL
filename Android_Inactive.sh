@@ -352,7 +352,17 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     mkdir -p "$External_Storage_Dir" || { echo "Failed to create 07_External_Storage directory"; exit 1; }
 
     lsusb > "$External_Storage_Dir/lsusb.txt"
-    echo "\n!External Storage Done!\n"
+    echo "System USB device information has been successfully collected.\n"
+
+    blkid -o list > "$External_Storage_Dir/blkid.txt"
+    echo "Block device information has been successfully collected.\n"
+
+    echo "Enter duration (in minutes): "
+    read duration
+    timeout "${duration}m" logcat | grep -i “mount” > "$External_Storage_Dir/logcat_mount.txt"
+    echo "Logs were successfully collected to check for traces of external storage devices.\n"
+
+    echo "External storage data has been successfully collected.\n\n"
 }
 
 08_Shortcut() {
