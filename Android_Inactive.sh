@@ -383,9 +383,6 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     echo "\n!ShortCut Done!\n"
 }
 
-09_CALL_MESSAGE_MESSENGER_PHONE_INFORMATION() {
-
-}
 selected_options=""
 
 while true; do

@@ -71,6 +71,58 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     VirtualMemory_Dir="$target_dir/01_VirtualMemory_info"
     mkdir -p "$VirtualMemory_Dir" || { echo "Failed to create VirtualMemory directory"; exit 1; }
     while true; do
+        echo "Do you want to run the frida server in the background to perform a virtual memory dump? (y/n)"
+        read answer
+
+        case "$answer" in
+            [Yy]* )
+                # Determine the architecture
+                arch=$(getprop ro.product.cpu.abi)
+                frida_server="./frida-server-16.1.4-android-x86_64" # default value
+
+                if [ "$arch" = "x86" ]; then
+                    frida_server="./frida-server-16.1.4-android-x86"
+                fi
+
+                # Try to start the Frida server
+                $frida_server &
+
+                # Wait a little to capture the output of the last command
+                sleep 2
+
+                # Check the error message
+                if dmesg | tail -n 10 | grep -q "Unable to load SELinux policy"; then
+                    echo "It seems there's an issue with SELinux. Trying to set it to permissive mode..."
+            
+                    # Attempt to set SELinux to permissive mode
+                    setenforce 0
+            
+                    # Inform the user
+                    echo "SELinux mode is set to permissive temporarily. Starting the Frida server again..."
+            
+                    # Start the Frida server again
+                    ./frida-server-16.1.4-android-x86_64 &
+                fi
+
+                echo "frida-server is running in the background. Once you've finished with fridump3, press 'c' to continue."
+                while :; do
+                    read continue_key
+                    if [ "$continue_key" = "c" ] || [ "$continue_key" = "C" ]; then
+                        break
+                    fi
+                done
+                ;;
+            [Nn]* )
+                echo "Skipped starting the Frida server."
+                break
+                ;;
+            * )
+                echo "Please answer yes or no"
+                ;;
+        esac
+    done
+
+    while true; do
         echo "Choose an option for Virtual Memory:"
         echo "a: Dump all PIDs"
         echo "s: Specify PIDs"
