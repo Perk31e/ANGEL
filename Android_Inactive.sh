@@ -149,14 +149,17 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
 
     # Paths for recycle bin sub-directories
     trash_dump_path="$RecycleBin_Dir/trash_dump"
+    dot_trash_dump_path="$RecycleBin_Dir/dot_trash_dump"
     lf_dump_path="$RecycleBin_Dir/lf_dump"
 
     # Create sub-directories for 'trash' and 'lost+found'
     mkdir -p "$trash_dump_path" || { echo "Failed to create trash_dump directory"; exit 1; }
+    mkdir -p "$dot_trash_dump_path" || { echo "Failed to create dot_trash_dump directory"; exit 1; }
     mkdir -p "$lf_dump_path" || { echo "Failed to create lf_dump directory"; exit 1; }
 
     # Find and copy 'trash' and 'lost+found' to the corresponding sub-directories
     find / -type d -name '*trash*' -exec cp -Rn {} "$trash_dump_path" \; 2>/dev/null
+    find / -type d -name '.Trash' -exec cp -Rn {} "$dot_trash_dump_path" \; 2>/dev/null
     find / -type d -name '*lost+found*' -exec cp -Rn {} "$lf_dump_path" \; 2>/dev/null
 
     echo "Recycle Bin Data Dump Success"

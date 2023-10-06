@@ -82,6 +82,8 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
 
                 if [ "$arch" = "x86" ]; then
                     frida_server="./frida-server-16.1.4-android-x86"
+                elif [ "$arch" = "arm64-v8a" ]; then
+                    frida_server="./frida-server-16.1.4-android-arm64"
                 fi
 
                 # Try to start the Frida server
@@ -311,9 +313,11 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     LogonUser_Dir="$target_dir/04_Logon_User_Information"
     mkdir -p "$LogonUser_Dir" || { echo "Failed to create Logon User Information directory"; exit 1; }
 
-    # echo "Contact info" 
-    db_file="/data/data/com.android.providers.contacts/databases/contacts2.db"
-    output_file="$LogonUser_Dir/contact.txt"
+    # Check if sqlite3 exists
+    if command -v sqlite3 >/dev/null 2>&1; then
+        # echo "Contact info" 
+        db_file="/data/data/com.android.providers.contacts/databases/contacts2.db"
+        output_file="$LogonUser_Dir/contact.txt"
 
 sqlite3 "$db_file" <<EOF > "$output_file"
 .mode csv
@@ -336,7 +340,7 @@ WHERE
 .quit
 EOF
 
-    echo "contact 정보가 저장되었습니다."
+    echo "contact info saved."
 
     # echo "mms info" 
     db_file="/data/data/com.android.providers.telephony/databases/mmssms.db"
@@ -373,18 +377,23 @@ ORDER BY
 .quit
 EOF
 
-    echo "mms 정보가 저장되었습니다."
+        echo "mms info saved."
 
+    else
+        echo "sqlite3 not found. Dumping database files directly."
+
+        # Dumping the two contact database files
+        cp "/data/data/com.samsung.android.providers.contacts/databases/contacts2.db" "$LogonUser_Dir/contacts2_data_data.db"
+        cp "/data/user/0/com.samsung.android.providers.contacts/databases/contacts2.db" "$LogonUser_Dir/contacts2_data_user.db"
+    fi
 
     echo "Image_Video info"
     source_directory="/sdcard/DCIM"
     destination_directory="$LogonUser_Dir/image_video"
     cp -r "$source_directory" "$destination_directory"
 
-
-echo "App_Data info"
-
-packages=$(pm list packages -a --user 0 | cut -d ':' -f 2)
+    echo "App_Data info"
+    packages=$(pm list packages -a --user 0 | cut -d ':' -f 2)
 
 while true; do
     echo "Choose an option for App Data:"
@@ -400,7 +409,7 @@ while true; do
                 package_info=$(dumpsys package $package)
         
                 # '.', '+', '-', ':', ';', '@', '[', ']'을 제외한 다른 특수 문자를 '_'로 변환
-                safe_package=$(echo "$package" | sed 's/[^a-zA-Z0-9\.\+\-:;@\[\]]/_/g')
+                safe_package=$(echo "$package" | sed 's/[^a-zA-Z0-9\.\+\:;@\[\]-]/_/g')
         
                 mkdir -p "$LogonUser_Dir/$safe_package"
                 output_file="$LogonUser_Dir/$safe_package/$safe_package.txt"
@@ -419,7 +428,7 @@ while true; do
             selected_packages=($specified_packages)
             for package in "${selected_packages[@]}"; do
                 package_info=$(dumpsys package $package)
-                safe_package=$(echo "$package" | sed 's/[^a-zA-Z0-9\.\+\-:;@\[\]]/_/g')
+                safe_package=$(echo "$package" | sed 's/[^a-zA-Z0-9\.\+\:;@\[\]-]/_/g')
                 mkdir -p "$LogonUser_Dir/$safe_package"
                 output_file="$LogonUser_Dir/$safe_package/$safe_package.txt"
                 echo "$package_info" > "$output_file"
