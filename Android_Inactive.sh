@@ -204,7 +204,7 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
             fi
             PROFILE_NAME=$(ls /data/data/$BROWSER_PACKAGE/files/mozilla | grep .default)
             PROFILE_PATH="/data/data/$BROWSER_PACKAGE/files/mozilla/$PROFILE_NAME"
-            HISTORY_DB_PATH="$PROFILE_PATH/places.sqlite"
+            HISTORY_DB_PATH="/data/data/$BROWSER_PACKAGE/files/places.sqlite"
             COOKIES_DB_PATH="$PROFILE_PATH/cookies.sqlite"
             CACHE_DIR_PATH="/data/data/$BROWSER_PACKAGE/cache"
         fi
