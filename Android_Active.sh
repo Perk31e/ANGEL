@@ -82,7 +82,7 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
 
                 if [ "$arch" = "x86" ]; then
                     frida_server="./frida-server-16.1.4-android-x86"
-                elif [ "$arch" = "arm64-v8a" ]; then
+                elif [[ "$arch" == *"arm64"* ]]; then # This will match any string containing "arm64"
                     frida_server="./frida-server-16.1.4-android-arm64"
                 fi
 
@@ -110,9 +110,11 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
                 while :; do
                     read continue_key
                     if [ "$continue_key" = "c" ] || [ "$continue_key" = "C" ]; then
+                        pkill frida-server
                         break
                     fi
                 done
+                break
                 ;;
             [Nn]* )
                 echo "Skipped starting the Frida server."
@@ -196,7 +198,7 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     echo "collecting route info"
     cat /proc/net/route > "$Network_Dir/route.txt"
 
-    echo "collecting DNS info"
+    echo "collecting system/network properties info"
     getprop > "$Network_Dir/getprop.txt"
 
     echo "collecting iptables info"
