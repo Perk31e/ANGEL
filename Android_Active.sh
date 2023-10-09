@@ -246,10 +246,10 @@ FridaServer() {
     echo "Collecting process memory info"
     dumpsys meminfo > "$Process_Dir/dumpsys_meminfo.txt"
 
-    # 사용자에게 strace를 실행할 시간을 물어보기
+    # Ask the user for the duration to run strace
     echo -n "Enter the duration in minutes to run strace for each process (default is 10 seconds): "
     read duration
-    # 사용자가 아무 값도 입력하지 않으면, 기본값 10초를 사용합니다.
+    # If the user enters no value, use the default value of 10 seconds.
     if [ -z "$duration" ]; then
         duration=0.1
     fi
@@ -414,7 +414,7 @@ while true; do
             for package in $packages; do
                 package_info=$(dumpsys package $package)
         
-                # '.', '+', '-', ':', ';', '@', '[', ']'을 제외한 다른 특수 문자를 '_'로 변환
+                # Convert all special characters to '_' except for '.', '+', '-', ':', ';', '@', '[', and ']'
                 safe_package=$(echo "$package" | sed 's/[^a-zA-Z0-9\.\+\:;@\[\]-]/_/g')
         
                 mkdir -p "$LogonUser_Dir/$safe_package"
@@ -478,17 +478,17 @@ echo "done"
     cat /proc/meminfo > "$System_Dir/memory.txt"
 
     # echo "battery info"
-    # 심볼릭 링크의 실제 경로 확인
+    # check out symbolic link's real path
     real_path=$(readlink -f /sys/class/power_supply/battery)
 
-    # 저장할 파일 경로 지정 
+    # specify file's path to save
     output_file="$System_Dir/battery"
     cp -r "$real_path" "$output_file"
 
-    if [ $? -eq 0 ]; then  # 저장이 완료되면 메시지 표시
-        echo "battery 내용을 파일에 저장했습니다."
+    if [ $? -eq 0 ]; then  # Display message upon completion of saving
+        echo "The content of battery has been saved to the file."
     else
-        echo "battery 저장 중 오류가 발생했습니다."
+        echo "An error occurred while saving the battery."
     fi
 }
 
@@ -514,23 +514,24 @@ echo "done"
     app_package=$(basename "$package_path")
     #echo "Checking $app_package..."
 
-    # 앱 패키지 이름으로 앱 정보 추출
+    # Extract app information using the app package name
     app_info=$(dumpsys package "$app_package")
 
-    # 자동 실행 항목 여부 확인 및 수집
+    # Check and collect information on auto-run items
     if echo "$app_info" | grep -q "Receiver Resolver Table"; then
         auto_start_info=$(echo "$app_info" | grep -A 3 "Receiver Resolver Table")
         echo "$auto_start_info" >> "$AutorunsList_Dir/auto_start_apps.txt"
     fi
     done
 
-    # 자동 실행 항목 정보가 없을 경우 없음을 표기
+    # In case of no information on auto-run items, mark as none
     if [ ! -s "$AutorunsList_Dir/auto_start_apps.txt" ]; then
-        echo "자동 실행 항목이 존재하지 않습니다." > "$AutorunsList_Dir/auto_start_apps.txt"
+        echo "No auto-run items exist." > "$AutorunsList_Dir/auto_start_apps.txt"
     fi
 
+    # We have added the Frida server for apps like com.samsung.android.app.routines to perform scheduled tasks
     FridaServer
-    echo "자동 실행 항목 정보 수집이 완료되었습니다."
+    echo "Auto-run item information collection has been completed."
 }
 
 # Function for Option 7: Clipboard
@@ -606,7 +607,7 @@ while true; do
     IFS=$old_ifs
 
     for choice in "${choices[@]}"; do
-        choice=$(echo $choice | tr -d ' ')  # 공백 제거
+        choice=$(echo $choice | tr -d ' ')
         case $choice in
             1) 01_VirtualMemory; selected_options="${selected_options}1," ;;
             2) 02_NetworkInfo; selected_options="${selected_options}2," ;;

@@ -71,11 +71,11 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     FileMetadata_Dir="$target_dir/01_Filesystem_Metadata_info"
     mkdir -p "$FileMetadata_Dir" || { echo "Failed to create 01_Filesystem_Metadata_info directory"; exit 1; }
 
-    #실행확인했으나 무한 작동,,,
+    # Execution confirmed, but it's running indefinitely...
     #find / -exec stat '{}' \;>stat.meta
     #find / -exec stat '{}' \; > "$FileMetadata_Dir/filesystem_metadata_info.txt"
 
-    # 사용자로부터 duration 값을 입력 받습니다.
+    # Receive the duration value from the user
     echo "Enter duration (in minutes): "
     read duration
     timeout "${duration}m" find / -exec stat '{}' \; > "$FileMetadata_Dir/filesystem_metadata_info.txt"
@@ -92,19 +92,19 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     mkdir -p "$SystemUserApplicationSetting_Dir" || { echo "Failed to create 02_SystemUserAppli_Setting_info directory"; exit 1; }
 
     #adb shell dumpsys 
-    #activity 시스템 상태 확인
+    # Check the system status of activity
     dumpsys activity > "$SystemUserApplicationSetting_Dir/activity.txt"
 
-    #최근에 사용한 #activity 시스템 상태만 확인
+    # Check only the system status of recently used activity
     dumpsys activity recents> "$SystemUserApplicationSetting_Dir/activity_recent.txt"
 
-    #모든 계정에 대한 정보 표시
+    # Display information for all accounts
     dumpsys account > "$SystemUserApplicationSetting_Dir/account.txt"
 
-    #cpu 프로세서 사용정보 확인
+    # Check CPU processor usage information
     dumpsys cpuinfo > "$SystemUserApplicationSetting_Dir/cpu_info.txt"
 
-    #설치된 모든 앱 출력
+    # Print all installed apps
     pm list packages > "$SystemUserApplicationSetting_Dir/app_list_info.txt"
 
     #list info on all apps
@@ -121,13 +121,13 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     LogFile_Dir="$target_dir/03_Log_Files"
     mkdir -p "$LogFile_Dir" || { echo "Failed to create 03_Log_Files directory"; exit 1; }
 
-    #adb shell dumpsys jobsechduler 실행
+    #adb shell dumpsys jobsechduler
     dumpsys jobscheduler > "$LogFile_Dir/jobscheduler_info.txt"
     #if [!"dumpsys_jobscheduler.txt"];
     #then echo "jobscheduler is not in this device!"
 
-    #이벤트 로그 
-    # 사용자로부터 duration 값을 입력 받습니다.
+    #event log
+    # Receive the duration value from the user
     echo "Enter duration (in minutes): "
     read duration
     timeout "${duration}m" logcat -b events > "$LogFile_Dir/event_log_info.txt"
@@ -398,7 +398,7 @@ while true; do
     IFS=$old_ifs
 
     for choice in "${choices[@]}"; do
-        choice=$(echo $choice | tr -d ' ')  # 공백 제거
+        choice=$(echo $choice | tr -d ' ')  # remove blank space
         case $choice in
             1) 01_Filesystem_Metadata; selected_options="${selected_options}1," ;;
             2) 02_System_User_Application_setting_Info; selected_options="${selected_options}2," ;;
