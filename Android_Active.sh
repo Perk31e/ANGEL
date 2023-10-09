@@ -59,17 +59,7 @@ echo $'██╔══██║██║╚██╗██║██║   ██�
 echo $'██║  ██║██║ ╚████║╚██████╔╝███████╗███████╗    ██║  ██║╚██████╗   ██║   ██║ ╚████╔╝ ███████╗'
 echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═╝  ╚═══╝  ╚══════╝'
 
-# Function for Option 1: Virtual Memory
-01_VirtualMemory() {
-    echo
-    echo "**********************************************"
-    echo
-    echo "             01 Virtual Memory "
-    echo
-    echo "**********************************************"
-    echo
-    VirtualMemory_Dir="$target_dir/01_VirtualMemory_info"
-    mkdir -p "$VirtualMemory_Dir" || { echo "Failed to create VirtualMemory directory"; exit 1; }
+FridaServer() {
     while true; do
         echo "Do you want to run the frida server in the background to perform a virtual memory dump? (y/n)"
         read answer
@@ -125,6 +115,20 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
                 ;;
         esac
     done
+}
+# Function for Option 1: Virtual Memory
+01_VirtualMemory() {
+    echo
+    echo "**********************************************"
+    echo
+    echo "             01 Virtual Memory "
+    echo
+    echo "**********************************************"
+    echo
+    VirtualMemory_Dir="$target_dir/01_VirtualMemory_info"
+    mkdir -p "$VirtualMemory_Dir" || { echo "Failed to create VirtualMemory directory"; exit 1; }
+
+    FridaServer
 
     while true; do
         echo "Choose an option for Virtual Memory:"
@@ -525,6 +529,7 @@ echo "done"
         echo "자동 실행 항목이 존재하지 않습니다." > "$AutorunsList_Dir/auto_start_apps.txt"
     fi
 
+    FridaServer
     echo "자동 실행 항목 정보 수집이 완료되었습니다."
 }
 
