@@ -368,24 +368,6 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     echo "External storage data has been successfully collected.\n\n"
 }
 
-08_Shortcut() {
-    echo
-    echo
-    echo "**********************************************"
-    echo
-    echo "                08 ShortCut  "
-    echo
-    echo "**********************************************"
-    echo
-    echo
-
-    ShortCut_Dir="$target_dir/08_ShortCut"
-    mkdir -p "$ShortCut_Dir" || { echo "Failed to create 08_ShortCut directory"; exit 1; }
-
-    cp -r /data/system_ce/0/shortcut_service  $ShortCut_Dir/
-    echo "\n!ShortCut Done!\n"
-}
-
 selected_options=""
 
 while true; do
@@ -397,7 +379,6 @@ while true; do
     echo "5: Browser Info"
     echo "6: Temp Files"
     echo "7: External Storage"
-    echo "8: Shortcut"
     echo "a: All options"
     echo "e: Exit"
     echo -n "Enter your choice (e.g. 1, 2, 3, 4 or a or e): "
@@ -407,7 +388,7 @@ while true; do
         echo "Exiting."
         exit 0
     elif [ "$main_choice" == "a" ]; then
-        main_choice="1,2,3,4,5,6,7,8"
+        main_choice="1,2,3,4,5,6,7"
     fi
 
     old_ifs=$IFS
@@ -426,13 +407,12 @@ while true; do
             5) 05_Browser_Info_File; selected_options="${selected_options}5," ;;
             6) 06_Temp_File; selected_options="${selected_options}6," ;;
             7) 07_External_Storage; selected_options="${selected_options}7," ;;
-            8) 08_Shortcut; selected_options="${selected_options}8," ;;
             *) echo "Invalid option: $choice" ;;
         esac
     done
 
     displayed_options=""
-    for option in 1 2 3 4 5 6 7 8; do
+    for option in 1 2 3 4 5 6 7; do
         if echo "$selected_options" | grep -q "$option,"; then
             displayed_options="${displayed_options}${option},"
         fi
