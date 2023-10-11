@@ -354,8 +354,8 @@ echo $'╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚�
     External_Storage_Dir="$target_dir/07_External_Storage"
     mkdir -p "$External_Storage_Dir" || { echo "Failed to create 07_External_Storage directory"; exit 1; }
 
-    lsusb > "$External_Storage_Dir/lsusb.txt"
-    echo "System USB device information has been successfully collected.\n"
+    # lsusb > "$External_Storage_Dir/lsusb.txt"
+    # echo "System USB device information has been successfully collected.\n"
 
     blkid -o list > "$External_Storage_Dir/blkid.txt"
     echo "Block device information has been successfully collected.\n"
