@@ -130,49 +130,49 @@ FridaServer() {
 
     FridaServer
 
-    # while true; do
-    #     echo "Choose an option for Virtual Memory:"
-    #     echo "a: Dump all PIDs"
-    #     echo "s: Specify PIDs"
-    #     echo "e: exit"
-    #     echo -n "Enter your choice (a/s/e): "
-    #     read choice
-    #     case $choice in
-    #         a)
-    #             echo "Dumping heap for all PIDs"
-    #             for line in $(ps -A | awk '{print $2","$9}'); do
-    #                 pid=$(echo $line | cut -d',' -f1)
-    #                 name=$(echo $line | cut -d',' -f2)
-    #                 if [ "$pid" != "PID" ]; then
-    #                     echo "Dumping heap for PID: $pid, Name: $name"
-    #                     am dumpheap $pid $VirtualMemory_Dir/$name.hprof
-    #                 fi
-    #             done
-    #             break
-    #             ;;
-    #         s)
-    #             ps -A
-    #             echo "Please refer to the above process list and specify PIDs."
-    #             echo "Dumping heap for specified PIDs."
-    #             echo -n "Enter PIDs separated by commas: "
-    #             read input
-    #             for pid in $(echo $input | tr "," "\n")
-    #             do
-    #                 name=$(ps -A | awk -v pid=$pid '$2 == pid {print $9}')
-    #                 echo "Dumping heap for PID: $pid, Name: $name"
-    #                 am dumpheap $pid $VirtualMemory_Dir/$name.hprof
-    #             done
-    #             break
-    #             ;;
-    #         e)
-    #             echo "Skipping and doing nothing."
-    #             break
-    #             ;;
-    #         *)
-    #             echo "Invalid option. Choose 'a' for all PIDs or 's' for specific PIDs."
-    #             ;;
-    #     esac
-    # done
+    while true; do
+        echo "Choose an option for Virtual Memory:"
+        echo "a: Dump all PIDs"
+        echo "s: Specify PIDs"
+        echo "e: exit"
+        echo -n "Enter your choice (a/s/e): "
+        read choice
+        case $choice in
+            a)
+                echo "Dumping heap for all PIDs"
+                for line in $(ps -A | awk '{print $2","$9}'); do
+                    pid=$(echo $line | cut -d',' -f1)
+                    name=$(echo $line | cut -d',' -f2)
+                    if [ "$pid" != "PID" ]; then
+                        echo "Dumping heap for PID: $pid, Name: $name"
+                        am dumpheap $pid $VirtualMemory_Dir/$name.hprof
+                    fi
+                done
+                break
+                ;;
+            s)
+                ps -A
+                echo "Please refer to the above process list and specify PIDs."
+                echo "Dumping heap for specified PIDs."
+                echo -n "Enter PIDs separated by commas: "
+                read input
+                for pid in $(echo $input | tr "," "\n")
+                do
+                    name=$(ps -A | awk -v pid=$pid '$2 == pid {print $9}')
+                    echo "Dumping heap for PID: $pid, Name: $name"
+                    am dumpheap $pid $VirtualMemory_Dir/$name.hprof
+                done
+                break
+                ;;
+            e)
+                echo "Skipping and doing nothing."
+                break
+                ;;
+            *)
+                echo "Invalid option. Choose 'a' for all PIDs or 's' for specific PIDs."
+                ;;
+        esac
+    done
 }
 # Function for Option 2: Network info
 02_NetworkInfo() {
