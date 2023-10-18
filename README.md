@@ -1,4 +1,4 @@
 # ANGEL
-Script for ANDROID LIVE FORENSIC
+This is a shell script used for collecting various information on Android devices
 
-we are currently writting ANDROID LIVE FORENSIC Script
+
