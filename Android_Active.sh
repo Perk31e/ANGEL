@@ -68,12 +68,14 @@ FridaServer() {
             [Yy]* )
                 # Determine the architecture
                 arch=$(getprop ro.product.cpu.abi)
-                frida_server="./frida-server-16.1.4-android-x86_64" # default value
+                frida_server="./frida-server-16.1.4-android-x86_64"
 
                 if [ "$arch" = "x86" ]; then
                     frida_server="./frida-server-16.1.4-android-x86"
-                elif [[ "$arch" == *"arm64"* ]]; then # This will match any string containing "arm64"
+                elif [[ "$arch" == *"arm64"* ]]; then 
                     frida_server="./frida-server-16.1.4-android-arm64"
+                elif [[ "$arch" == *"arm"* ]]; then 
+                    frida_server="./frida-server-16.1.4-android-arm"
                 fi
 
                 # Try to start the Frida server
