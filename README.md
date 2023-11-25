@@ -18,7 +18,7 @@ As you can see you accessed shell with root
 
 
 2) Now PUSH Android shell script to your environment
-![PUSH Android Shell](https://github.com/S3xyG4y/ANGEL/assets/55012702/2ca8d350-7e79-46a0-a47d-906794f085a1)
+![PUSH Android Shell](https://github.com/S3xyG4y/ANGEL/assets/55012702/11a78724-5f8c-4155-9d7e-f5f05596e2ec)
 
 
 (Detailed explanation is needed regarding the license and script)
