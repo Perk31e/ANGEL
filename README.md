@@ -3,7 +3,7 @@ This is a shell script used for collecting various information on Android device
 
 If you want to test on virtual environment you must prepare following steps
 
-1) Nox Player:
+1-1) Nox Player:
 
 ![Nox-Root](https://github.com/S3xyG4y/ANGEL/assets/55012702/5655ff56-375b-4202-b507-c6d5375cbd2a)<br/>
 1. Check option to get Root privilege
