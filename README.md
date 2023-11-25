@@ -1,7 +1,7 @@
 # ANGEL
 This is a shell script used for collecting various information on Android devices
 
-If you want to test on
+If you want to test on virtual environment you must prepare following steps
 
 1) Nox Player:
 
