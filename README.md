@@ -18,8 +18,11 @@ If you want to test on virtual environment you must prepare following steps
 As you can see you accessed shell with root
 
 
-2) Now PUSH Android shell script to your environment
-![PUSH Android Shell](https://github.com/S3xyG4y/ANGEL/assets/55012702/11a78724-5f8c-4155-9d7e-f5f05596e2ec)
+2) Check your environment's architecture<br/><br/>
+![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2ff62415-eec0-49f4-a951-e988243087a4)<br/>
+as command output shows up this architecture is x86<br/>
+3) Now PUSH Android shell script to your environment<br/><br/>
+![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2fb7ef9d-9d13-4a02-aaa8-e84c2e522cf3)<br/>
 
 
 (Detailed explanation is needed regarding the license and script)
