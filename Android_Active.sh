@@ -29,6 +29,8 @@ CheckPsCommand() {
         if [ $? -ne 0 ]; then
             # 'ps -A' failed, use 'ps' instead
             ps_command="ps"
+            echo "This environment does not support 'ps -A'. Executing with 'ps' command instead."
+            echo.
         else
             # 'ps -A' succeeded
             ps_command="ps -A"
