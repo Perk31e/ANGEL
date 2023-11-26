@@ -503,12 +503,18 @@ while true; do
             for package in $packages; do
                 package_info=$(dumpsys package $package)
 
+                # Check if package_info contains meaningful data
+                if [ -z "$package_info" ] || [[ $package_info == *"not found"* ]]; then
+                    echo "No information found for package: $package"
+                    continue
+                fi
+
                 # Convert all special characters to '_' except for '.', '+', '-', ':', ';', '@', '[', and ']'
                 safe_package=$(echo "$package" | sed 's/[^a-zA-Z0-9\.\+\:;@\[\]-]/_/g')
 
                 mkdir -p "$LogonUser_Dir/$safe_package" || { echo "Failed to create directory for $safe_package"; continue; }
                 output_file="$LogonUser_Dir/$safe_package/$safe_package.txt"
-        
+    
                 # Try to save the package info and check for errors
                 if ! echo "$package_info" > "$output_file"; then
                     echo "Failed to save package info for $package"
@@ -518,6 +524,7 @@ while true; do
             done
             echo "All attempted package info saves have been processed."
             ;;
+
 
         s)
             CheckPsCommand
@@ -530,10 +537,18 @@ while true; do
             selected_packages=($specified_packages)
             for package in "${selected_packages[@]}"; do
                 package_info=$(dumpsys package $package)
+
+                # Check if package_info contains meaningful data
+                if [ -z "$package_info" ] || [[ $package_info == *"not found"* ]]; then
+                    echo "No information found for package: $package"
+                    continue
+                fi
+
                 safe_package=$(echo "$package" | sed 's/[^a-zA-Z0-9\.\+\:;@\[\]-]/_/g')
-                mkdir -p "$LogonUser_Dir/$safe_package"
+                mkdir -p "$LogonUser_Dir/$safe_package" || { echo "Failed to create directory for $safe_package"; continue; }
                 output_file="$LogonUser_Dir/$safe_package/$safe_package.txt"
                 echo "$package_info" > "$output_file"
+                echo "Package info for $package saved successfully."
             done
             break
             ;;
