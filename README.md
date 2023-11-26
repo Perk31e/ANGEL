@@ -24,7 +24,7 @@ Push the ANGEL scripts and the Frida server to your environment. You can downloa
 ### **4. Grant Permission**<br/>
 ![grant permission](https://github.com/S3xyG4y/ANGEL/assets/55012702/17bdbbc7-6103-4941-8814-4b1e0b9ba009)<br/>
 **[*] Error handling** - If you encounter issues where characters appear shattered after executing Android_main.sh, it may be due to the text type being CRLF instead of LF. In this case, you can convert the line endings using the following command: <br/>
-![sed](https://github.com/S3xyG4y/ANGEL/assets/55012702/cc9a3300-85ca-4f3f-bdee-7805685414ec)<br/>
+![sed](https://github.com/S3xyG4y/ANGEL/assets/55012702/cc9a3300-85ca-4f3f-bdee-7805685414ec)<br/><br/>
 -command example-<br/>
 ```sh
 sed -i 's/\r$//' [yourfilename]
