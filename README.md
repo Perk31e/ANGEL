@@ -31,7 +31,7 @@ Push the ANGEL scripts and the Frida server to your environment. You can downloa
 ### **4. Grant Permission**<br/>
 ![grant permission](https://github.com/S3xyG4y/ANGEL/assets/55012702/17bdbbc7-6103-4941-8814-4b1e0b9ba009)<br/><br/>
 
-##**Disconnecting from the ADB Session:** After completing your tasks using ADB, it's recommended to properly disconnect the session, especially when working with specific IP addresses and port numbers. To disconnect from an ADB session and if you want to ensure that all ADB processes are terminated and to reset the ADB server, use the following command.<br/><br/>
+## **Disconnecting from the ADB Session:** After completing your tasks using ADB, it's recommended to properly disconnect the session, especially when working with specific IP addresses and port numbers. To disconnect from an ADB session and if you want to ensure that all ADB processes are terminated and to reset the ADB server, use the following command.<br/><br/>
 ![terminate](https://github.com/S3xyG4y/ANGEL/assets/55012702/fad4f679-f20b-4ef0-a5c9-a3be53ec9a74)
 
 **[*] Error handling**<br/><br/>
