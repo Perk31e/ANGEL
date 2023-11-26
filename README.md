@@ -16,7 +16,7 @@ As shown above, you can access the shell with root access.
 
 ### **2. Check Your Environment's Architecture**
 Determine the architecture of your environment.<br/>
-![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2ff62415-eec0-49f4-a951-e988243087a4)<br/>
+![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2ff62415-eec0-49f4-a951-e988243087a4)<br/><br/>
 ```sh
 getprop ro.product.cpu.abi
 ```
