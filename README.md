@@ -23,7 +23,7 @@ As you can see you accessed shell with root
 as command output shows up this architecture is x86<br/>
 3) Now PUSH Android shell script to your environment<br/><br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2fb7ef9d-9d13-4a02-aaa8-e84c2e522cf3)<br/>
-
+push ANGEL scripts and frida server (you can download frida server from here - https://github.com/frida/frida/releases)<br/>
 
 (Detailed explanation is needed regarding the license and script)
 
