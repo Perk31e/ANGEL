@@ -20,7 +20,7 @@ As shown above, you can access the shell with root access.
 2. Check Your Environment's Architecture
 Determine the architecture of your environment.<br/><br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2ff62415-eec0-49f4-a951-e988243087a4)<br/>
-For example, the output above indicates an x86 architecture.<br/>
+For example, the output above indicates an x86 architecture.<br/><br/>
 3. Push the ANGEL Script<br/><br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2fb7ef9d-9d13-4a02-aaa8-e84c2e522cf3)<br/>
 Push the ANGEL scripts and the Frida server to your environment. You can download the Frida server from https://github.com/frida/frida/releases <br/>
