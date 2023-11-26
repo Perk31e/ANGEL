@@ -2,9 +2,9 @@
 ANGEL is a shell script designed for collecting various information from Android devices.
 
 ## **Testing in a Virtual Environment** <br/><br/>
-### **To test ANGEL in a virtual environment, follow these steps:**
+To test ANGEL in a virtual environment, follow these steps:
 
-1. Using Nox Player
+### **1. Using Nox Player**
 1) Enable Root Access: Ensure that the option to get Root privilege is enabled in Nox Player.<br/><br/>
 ![Nox-Root](https://github.com/S3xyG4y/ANGEL/assets/55012702/5655ff56-375b-4202-b507-c6d5375cbd2a)<br/>
 2) Connect Your Nox Player: Establish a connection with your Nox player.<br/><br/>
