@@ -15,14 +15,14 @@ To test ANGEL in a virtual environment, follow these steps:
 As shown above, you can access the shell with root access.
 
 ### **2. Check Your Environment's Architecture**
-Determine the architecture of your environment.<br/><br/>
+Determine the architecture of your environment.<br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2ff62415-eec0-49f4-a951-e988243087a4)<br/>
-For example, the output above indicates an x86 architecture.<br/><br/>
-### **3. Push the ANGEL Script**<br/><br/>
+For example, the output above indicates an x86 architecture.<br/>
+### **3. Push the ANGEL Script**<br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2fb7ef9d-9d13-4a02-aaa8-e84c2e522cf3)<br/>
-Push the ANGEL scripts and the Frida server to your environment. You can download the Frida server from following link: https://github.com/frida/frida/releases <br/><br/>
+Push the ANGEL scripts and the Frida server to your environment. You can download the Frida server from following link: https://github.com/frida/frida/releases <br/>
 ### **4. Grant Permission**<br/>
-![grant permission](https://github.com/S3xyG4y/ANGEL/assets/55012702/17bdbbc7-6103-4941-8814-4b1e0b9ba009)<br/><br/>
+![grant permission](https://github.com/S3xyG4y/ANGEL/assets/55012702/17bdbbc7-6103-4941-8814-4b1e0b9ba009)<br/>
 **[*] Error handling** - If you encounter issues where characters appear shattered after executing Android_main.sh, it may be due to the text type being CRLF instead of LF. In this case, you can convert the line endings using the following command: <br/>
 ![sed](https://github.com/S3xyG4y/ANGEL/assets/55012702/cc9a3300-85ca-4f3f-bdee-7805685414ec)<br/>
 -command example-<br/>
