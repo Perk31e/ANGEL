@@ -5,14 +5,11 @@ ANGEL is a shell script designed for collecting various information from Android
 To test ANGEL in a virtual environment, follow these steps:
 
 1. Using Nox Player
-1. Enable Root Access: Ensure that the option to get Root privilege is enabled in Nox Player.<br/><br/>
-
+1) Enable Root Access: Ensure that the option to get Root privilege is enabled in Nox Player.<br/><br/>
 ![Nox-Root](https://github.com/S3xyG4y/ANGEL/assets/55012702/5655ff56-375b-4202-b507-c6d5375cbd2a)<br/>
-
-2. Connect Your Nox Player: Establish a connection with your Nox player.<br/><br/>
+2) Connect Your Nox Player: Establish a connection with your Nox player.<br/><br/>
 ![adb connect](https://github.com/S3xyG4y/ANGEL/assets/55012702/e9dd43ce-59ea-4fd8-9fb2-5640bb4d8401)<br/>
-
-3. Execute Shell: Access the shell with root privileges.<br/><br/>
+3) Execute Shell: Access the shell with root privileges.<br/><br/>
 ![shell access](https://github.com/S3xyG4y/ANGEL/assets/55012702/23b243e6-aa76-48f6-a033-9aa610b6065a)<br/>
 
 As shown above, you can access the shell with root access.
