@@ -26,7 +26,10 @@ as command output shows up this architecture is x86<br/>
 push ANGEL scripts and frida server (you can download frida server from here - https://github.com/frida/frida/releases)<br/>
 4) grant permission<br/>
 ![grant permission](https://github.com/S3xyG4y/ANGEL/assets/55012702/17bdbbc7-6103-4941-8814-4b1e0b9ba009)<br/>
-
+[*] Error handling - after we grant permission to thesee files then when we execute Android_main.sh it can be looks like characters shattered that would be the text type is CRLF not LF in that case ypu can follow below step (execute below commands only for scripts by the way we already set .gitattribute to use LF)<br/>
+![sed](https://github.com/S3xyG4y/ANGEL/assets/55012702/cc9a3300-85ca-4f3f-bdee-7805685414ec)<br/>
+-command example-<br/>
+sed -i 's/\r$//' [yourfilename]<br/>
 
 (Detailed explanation is needed regarding the license and script)
 
