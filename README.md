@@ -20,6 +20,7 @@ Determine the architecture of your environment.<br/>
 ```sh
 getprop ro.product.cpu.abi
 ```
+or
 ```sh
 uname -m
 ```
