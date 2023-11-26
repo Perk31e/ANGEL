@@ -16,6 +16,27 @@ else
 fi
 
 mkdir -p "$target_dir" || { echo "Failed to create directory"; exit 1; }
+# Declare a global variable to track whether the 'ps -A' command has been checked.
+ps_checked=0
+ps_command=""
+
+# Check if 'ps -A' command works
+CheckPsCommand() {
+    # Check if the 'ps -A' command has already been checked.
+    if [ $ps_checked -eq 0 ]; then
+        # Attempt the 'ps -A' command.
+        ps -A 2>/dev/null
+        if [ $? -ne 0 ]; then
+            # 'ps -A' failed, use 'ps' instead
+            ps_command="ps"
+        else
+            # 'ps -A' succeeded
+            ps_command="ps -A"
+        fi
+        # Record the execution status of the 'ps -A' command.
+        ps_checked=1
+    fi
+}
 
 echo -en $'\E[93m'
 echo $'                         ..::::::::::::::..  .:'                               
@@ -131,6 +152,7 @@ FridaServer() {
     mkdir -p "$VirtualMemory_Dir" || { echo "Failed to create VirtualMemory directory"; exit 1; }
 
     FridaServer
+    CheckPsCommand
 
     while true; do
         echo "Choose an option for Virtual Memory:"
@@ -142,27 +164,47 @@ FridaServer() {
         case $choice in
             a)
                 echo "Dumping heap for all PIDs"
-                for line in $(ps -A | awk '{print $2","$9}'); do
-                    pid=$(echo $line | cut -d',' -f1)
-                    name=$(echo $line | cut -d',' -f2)
-                    if [ "$pid" != "PID" ]; then
-                        echo "Dumping heap for PID: $pid, Name: $name"
-                        am dumpheap $pid $VirtualMemory_Dir/$name.hprof
-                    fi
-                done
+                if [ "$ps_command" = "ps -A" ]; then
+                    for line in $($ps_command | awk '{print $2","$9}'); do
+                        pid_step1=$(echo $line | cut -d',' -f1)
+                        name=$(echo $line | cut -d',' -f2)
+                        if [ "$pid_step1" != "PID" ] && [ -n "$name" ]; then
+                            echo "Dumping heap for PID: $pid_step1, Name: $name"
+                            am dumpheap $pid_step1 $VirtualMemory_Dir/$name.hprof
+                        else
+                            echo "Skipping PID: $pid_step1 with no valid name"
+                        fi
+                    done
+                else
+                    for line in $($ps_command | awk '{print $2","$8}'); do
+                        pid_step1=$(echo $line | cut -d',' -f1)
+                        name=$(echo $line | cut -d',' -f2)
+                        if [ "$pid_step1" != "PID" ] && [ -n "$name" ]; then
+                            echo "Dumping heap for PID: $pid_step1, Name: $name"
+                            am dumpheap $pid_step1 $VirtualMemory_Dir/$name.hprof
+                        else
+                            echo "Skipping PID: $pid_step1 with no valid name"
+                        fi
+                    done
+                fi
                 break
                 ;;
+
             s)
-                ps -A
+                $ps_command
                 echo "Please refer to the above process list and specify PIDs."
                 echo "Dumping heap for specified PIDs."
                 echo -n "Enter PIDs separated by commas: "
                 read input
-                for pid in $(echo $input | tr "," "\n")
+                for pid_step1 in $(echo $input | tr "," "\n")
                 do
-                    name=$(ps -A | awk -v pid=$pid '$2 == pid {print $9}')
-                    echo "Dumping heap for PID: $pid, Name: $name"
-                    am dumpheap $pid $VirtualMemory_Dir/$name.hprof
+                    if [ "$ps_command" = "ps -A" ]; then
+                        name=$($ps_command | awk -v pid=$pid_step1 '$2 == pid {print $9}')
+                    else
+                        name=$($ps_command | awk -v pid=$pid_step1 '$2 == pid {print $8}')
+                    fi
+                    echo "Dumping heap for PID: $pid_step1, Name: $name"
+                    am dumpheap $pid_step1 $VirtualMemory_Dir/$name.hprof
                 done
                 break
                 ;;
@@ -229,6 +271,7 @@ FridaServer() {
     echo "**********************************************"
     echo
     echo
+    CheckPsCommand
     Process_Dir="$target_dir/03_Process_info"
     mkdir -p "$Process_Dir" || { echo "Failed to create Process directory"; exit 1; }
 
@@ -237,7 +280,7 @@ FridaServer() {
     top -b -n 1 > "$Process_Dir/top.txt"
 
     echo "Collecting Process list"
-    ps -A > "$Process_Dir/ps.txt"
+    $ps_command > "$Process_Dir/ps.txt"
 
     echo "Collecting file list opened by process"
     lsof > "$Process_Dir/lsof.txt" 
@@ -265,29 +308,47 @@ FridaServer() {
 	while true; do
 	    case $choice in
 	        a)
-	            echo "Performing strace and dumpsys meminfo for all PIDs"
-	            for line in $(ps -A | awk '{print $2","$9}'); do
-	            	pid_step3=$(echo $line | cut -d',' -f1)
-		            name=$(echo $line | cut -d',' -f2)
-		            if [ "$pid_step3" != "PID" ]; then
-                    			echo "Performing strace for PID: $pid_step3, Name: $name for $duration minutes"
-                    			timeout ${duration}m strace -p $pid_step3 &> "$Process_Dir/dumpsys_strace_$pid_step3.txt"
+                echo "Performing strace and dumpsys meminfo for all PIDs"
+                if [ "$ps_command" = "ps -A" ]; then
+                    for line in $($ps_command | awk '{print $2","$9}'); do
+                        pid_step3=$(echo $line | cut -d',' -f1)
+                        name=$(echo $line | cut -d',' -f2)
+                        if [ "$pid_step3" != "PID" ]; then
+                            echo "Performing strace for PID: $pid_step3, Name: $name for $duration minutes"
+                            timeout ${duration}m strace -p $pid_step3 &> "$Process_Dir/dumpsys_strace_$pid_step3.txt"
 
-                    			echo "Performing dumpsys meminfo for PID: $pid_step3, Name: $name"
-                    			dumpsys meminfo $pid_step3 > "$Process_Dir/dumpsys_meminfo_$pid_step3.txt"
-                		fi
-	            done
-	            break
-	            ;;
+                            echo "Performing dumpsys meminfo for PID: $pid_step3, Name: $name"
+                            dumpsys meminfo $pid_step3 > "$Process_Dir/dumpsys_meminfo_$pid_step3.txt"
+                        fi
+                    done
+                else
+                    for line in $($ps_command | awk '{print $2","$8}'); do
+                        pid_step3=$(echo $line | cut -d',' -f1)
+                        name=$(echo $line | cut -d',' -f2)
+                        if [ "$pid_step3" != "PID" ]; then
+                            echo "Performing strace for PID: $pid_step3, Name: $name for $duration minutes"
+                            timeout ${duration}m strace -p $pid_step3 &> "$Process_Dir/dumpsys_strace_$pid_step3.txt"
+
+                            echo "Performing dumpsys meminfo for PID: $pid_step3, Name: $name"
+                            dumpsys meminfo $pid_step3 > "$Process_Dir/dumpsys_meminfo_$pid_step3.txt"
+                        fi
+                    done
+                fi
+                break
+                ;;
 	        s)
-	            ps -A
+	            $ps_command
 	            echo "Please refer to the above process list and specify PIDs."
 	            echo "Performing strace and dumpsys meminfo for specified PIDs."
 	            echo -n "Enter PIDs separated by commas: "
 	            read input
 	            for pid_step3 in $(echo $input | tr "," "\n")
 	            do
-	                name=$(ps -A | awk -v pid=$pid_step3 '$2 == pid {print $9}')
+	                if [ "$ps_command" = "ps -A" ]; then
+                        name=$($ps_command | awk -v pid=$pid_step3 '$2 == pid {print $9}')
+                    else
+                        name=$($ps_command | awk -v pid=$pid_step3 '$2 == pid {print $8}')
+                    fi
 	                echo "Performing strace for PID: $pid_step3, Name: $name"
 	                timeout ${duration}m strace -p $pid_step3 &> "$Process_Dir/dumpsys_strace_$pid_step3.txt"
 
@@ -348,7 +409,11 @@ WHERE
 .quit
 EOF
 
-    echo "contact info saved."
+    if [ $? -eq 0 ]; then
+        echo "Contact info saved."
+    else
+        echo "Error: Failed to save contact info."
+    fi
 
     # echo "mms info" 
     db_file="/data/data/com.android.providers.telephony/databases/mmssms.db"
@@ -385,7 +450,11 @@ ORDER BY
 .quit
 EOF
 
-        echo "mms info saved."
+        if [ $? -eq 0 ]; then
+            echo "MMS info saved."
+        else
+            echo "Error: Failed to save MMS info."
+        fi
 
     else
         echo "sqlite3 not found. Dumping database files directly."
@@ -398,10 +467,26 @@ EOF
     echo "Image_Video info"
     source_directory="/sdcard/DCIM"
     destination_directory="$LogonUser_Dir/image_video"
-    cp -r "$source_directory" "$destination_directory"
+    if cp -r "$source_directory" "$destination_directory"; then
+        echo "Image and video info copied successfully."
+    else
+        echo "Error: Failed to copy image and video info."
+    fi
 
     echo "App_Data info"
     packages=$(pm list packages -a --user 0 | cut -d ':' -f 2)
+
+    for package in $packages; do
+        package_info=$(dumpsys package $package)
+        safe_package=$(echo "$package" | sed 's/[^a-zA-Z0-9\.\+\:;@\[\]-]/_/g')
+        mkdir -p "$LogonUser_Dir/$safe_package"
+        output_file="$LogonUser_Dir/$safe_package/$safe_package.txt"
+        if echo "$package_info" > "$output_file"; then
+            echo "Package info for $package saved."
+        else
+            echo "Error: Failed to save package info for $package."
+        fi
+    done
 
 while true; do
     echo "Choose an option for App Data:"
@@ -415,20 +500,27 @@ while true; do
         a)
             for package in $packages; do
                 package_info=$(dumpsys package $package)
-        
+
                 # Convert all special characters to '_' except for '.', '+', '-', ':', ';', '@', '[', and ']'
                 safe_package=$(echo "$package" | sed 's/[^a-zA-Z0-9\.\+\:;@\[\]-]/_/g')
-        
-                mkdir -p "$LogonUser_Dir/$safe_package"
+
+                mkdir -p "$LogonUser_Dir/$safe_package" || { echo "Failed to create directory for $safe_package"; continue; }
                 output_file="$LogonUser_Dir/$safe_package/$safe_package.txt"
-                echo "$package_info" > "$output_file"
-        done
-        echo "All packages info have been saved."
-        ;;
+        
+                # Try to save the package info and check for errors
+                if ! echo "$package_info" > "$output_file"; then
+                    echo "Failed to save package info for $package"
+                else
+                    echo "Package info for $package saved successfully."
+                fi
+            done
+            echo "All attempted package info saves have been processed."
+            ;;
 
         s)
+            CheckPsCommand
             echo "Current running processes:"
-            ps -A
+            $ps_command
 
             echo "Enter package names separated by commas followed by a space. For example: com.android.test1, com.android.test2"
             read specified_packages
