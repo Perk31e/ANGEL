@@ -1,7 +1,7 @@
 # ANGEL
 ANGEL is a shell script designed for collecting various information from Android devices.
 
-##**Testing in a Virtual Environment**##<br/><br/>
+## **Testing in a Virtual Environment** ##<br/><br/>
 To test ANGEL in a virtual environment, follow these steps:
 
 1. Using Nox Player
