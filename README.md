@@ -27,7 +27,7 @@ Push the ANGEL scripts and the Frida server to your environment. You can downloa
 ![sed](https://github.com/S3xyG4y/ANGEL/assets/55012702/cc9a3300-85ca-4f3f-bdee-7805685414ec)<br/>
 -command example-<br/>
 ```sh
-sed -i 's/\r$//' [*yourfilename*]
+sed -i 's/\r$//' [yourfilename]
 ```
 
 (Detailed explanation is needed regarding the license and script)
