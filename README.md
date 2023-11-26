@@ -27,7 +27,7 @@ uname -m
 For example, the output above indicates an x86 architecture.<br/>
 ### **3. Push the ANGEL Script**<br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2fb7ef9d-9d13-4a02-aaa8-e84c2e522cf3)<br/>
-Push the ANGEL scripts and the Frida server to your environment. You can download the Frida server from following link: https://github.com/frida/frida/releases <br/>
+Push the ANGEL scripts and the Frida server to your environment. You can download the Frida server from following link:<br/> https://github.com/frida/frida/releases <br/>
 ### **4. Grant Permission**<br/>
 ![grant permission](https://github.com/S3xyG4y/ANGEL/assets/55012702/17bdbbc7-6103-4941-8814-4b1e0b9ba009)<br/><br/>
 **[*] Error handling**<br/><br/>
