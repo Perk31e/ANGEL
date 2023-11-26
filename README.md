@@ -12,6 +12,7 @@ To test ANGEL in a virtual environment, follow these steps:
 3) **Execute Shell:** Access the shell with root privileges.<br/><br/>
 ![shell access](https://github.com/S3xyG4y/ANGEL/assets/55012702/23b243e6-aa76-48f6-a033-9aa610b6065a)<br/>
 ### **1-2) Using Android Studio**
+### **1-3) Using Genymotion**
 As shown above, you can access the shell with root access.
 
 ### **2. Check Your Environment's Architecture**
