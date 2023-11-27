@@ -82,7 +82,7 @@ adb kill-server
 **[*] Error handling**<br/><br/>
 If you encounter issues where characters appear shattered after executing Android_main.sh, it may be due to the text type being CRLF instead of LF. In this case, you can convert the line endings using the following command: <br/><br/>
 ![sed](https://github.com/S3xyG4y/ANGEL/assets/55012702/cc9a3300-85ca-4f3f-bdee-7805685414ec)<br/><br/>
--command example-<br/>
+- Command Example -<br/>
 ```sh
 sed -i 's/\r$//' [yourfilename]
 ```
