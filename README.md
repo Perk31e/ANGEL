@@ -15,7 +15,10 @@ when you reached advanced tab press Environment Variables<br/><br/>
 now select System variables's Path<br/><br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/9ba154a5-e19f-4552-8a63-8967f6c5387a)<br/>
 add your adb path ex) "C:\Users\yourusername\AppData\Local\Android\Sdk\platform-tools"<br/>
+![adb success](https://github.com/S3xyG4y/ANGEL/assets/55012702/324316d8-a274-41db-ace3-17a341f899e8)<br/>
+(if you set adb environment properly, cmd will show like this)<br/>
 if you followed all step described above run adb on cmd if your terminal already executed exit that terminal then retry it<br/><br/>
+
 ### **2-1) Using Nox Player**
 1) **Enable Root Access:** Ensure that the option to get Root privilege is enabled in Nox Player.<br/><br/>
 ![Nox-Root](https://github.com/S3xyG4y/ANGEL/assets/55012702/5655ff56-375b-4202-b507-c6d5375cbd2a)<br/>
