@@ -39,7 +39,7 @@ q) why should i choose Target's Google API -> a) Because we need root access so 
 5) **type adb root:** now get root access<br/><br/>
 ![adb root](https://github.com/S3xyG4y/ANGEL/assets/55012702/78d697d9-d8c0-4c18-a75a-4b5c9622557c)<br/>
 6) **type adb shell:** now you got access to Android shell<br/><br/>
-![adb shell](https://github.com/S3xyG4y/ANGEL/assets/55012702/15480391-4cd9-43f1-8ff5-74edf3a3273a)<br/>
+![adb shell](https://github.com/S3xyG4y/ANGEL/assets/55012702/202b7a39-d9db-48f4-86ae-1da43365c2f0)<br/>
 As shown above, you can access the shell with root access.
 
 ### **3. Check Your Environment's Architecture**
