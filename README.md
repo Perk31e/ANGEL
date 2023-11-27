@@ -14,7 +14,8 @@ when you reached advanced tab press Environment Variables<br/><br/>
 ![sysdmcpl path](https://github.com/S3xyG4y/ANGEL/assets/55012702/643bb842-592c-4b8f-8040-e4d4def2ba08)<br/>
 now select System variables's Path<br/><br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/9ba154a5-e19f-4552-8a63-8967f6c5387a)<br/>
-add your adb path ex) "C:\Users\yourusername\AppData\Local\Android\Sdk\platform-tools"<br/><br/>
+add your adb path ex) "C:\Users\yourusername\AppData\Local\Android\Sdk\platform-tools"<br/>
+if you followed all step described above run adb on cmd if your terminal already executed exit that terminal then retry it<br/><br/>
 ### **2-1) Using Nox Player**
 1) **Enable Root Access:** Ensure that the option to get Root privilege is enabled in Nox Player.<br/><br/>
 ![Nox-Root](https://github.com/S3xyG4y/ANGEL/assets/55012702/5655ff56-375b-4202-b507-c6d5375cbd2a)<br/>
@@ -23,7 +24,6 @@ add your adb path ex) "C:\Users\yourusername\AppData\Local\Android\Sdk\platform-
 3) **Execute Shell:** Access the shell with root privileges.<br/><br/>
 ![shell access](https://github.com/S3xyG4y/ANGEL/assets/55012702/23b243e6-aa76-48f6-a033-9aa610b6065a)<br/>
 ### **2-2) Using Android Studio**
-### **2-3) Using Genymotion**
 As shown above, you can access the shell with root access.
 
 ### **3. Check Your Environment's Architecture**
