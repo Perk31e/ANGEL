@@ -1,7 +1,7 @@
 # **ANGEL: Android Data Collection Script**
 ANGEL is a script designed to automate the collection of essential data from Android devices.
 
-## **ANGEL Introduction** <br/><br/>
+## **ANGEL Introduction** <br/>
 ANGEL is a powerful script designed for Android devices, aimed at automating the collection of essential data. This tool simplifies the process of gathering critical information, making it invaluable for developers, testers, and forensic analysts.
 
 ## **Purpose and Use Cases** <br/><br/>
