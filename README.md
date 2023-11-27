@@ -1,4 +1,4 @@
-# **ANGEL**
+# **ANGEL: Android Data Collection Script**
 ANGEL is a shell script designed for collecting various information from Android devices.
 
 ## **Testing in a Virtual Environment** <br/><br/>
