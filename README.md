@@ -4,24 +4,25 @@ ANGEL is a shell script designed for collecting various information from Android
 ## **Testing in a Virtual Environment** <br/><br/>
 To test ANGEL in a virtual environment, follow these steps:
 
-### **1-1) Using Nox Player**
+### **1) set Environment variable for adb **
 ![run](https://github.com/S3xyG4y/ANGEL/assets/55012702/11663704-1c85-41bb-986d-8a6f93b704e0)<br/>
 press keyboard's windows key button and r button will pops up run.exe type sysdml.cpl<br/><br/>
 ![sysdm cpl image](https://github.com/S3xyG4y/ANGEL/assets/55012702/8c49a506-a5c6-4190-8c72-d874d68ef50e)<br/>
 you can see system properties then get to the Advance tab<br/><br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/68f73d4f-a4dd-405a-b4d4-b11e58586cee)<br/>
 when you reached advanced tab press Environment Variables<br/><br/>
+### **2-1) Using Nox Player**
 1) **Enable Root Access:** Ensure that the option to get Root privilege is enabled in Nox Player.<br/><br/>
 ![Nox-Root](https://github.com/S3xyG4y/ANGEL/assets/55012702/5655ff56-375b-4202-b507-c6d5375cbd2a)<br/>
 2) **Connect Your Nox Player:** Establish a connection with your Nox player.<br/><br/>
 ![adb connect](https://github.com/S3xyG4y/ANGEL/assets/55012702/e9dd43ce-59ea-4fd8-9fb2-5640bb4d8401)<br/>
 3) **Execute Shell:** Access the shell with root privileges.<br/><br/>
 ![shell access](https://github.com/S3xyG4y/ANGEL/assets/55012702/23b243e6-aa76-48f6-a033-9aa610b6065a)<br/>
-### **1-2) Using Android Studio**
-### **1-3) Using Genymotion**
+### **2-2) Using Android Studio**
+### **2-3) Using Genymotion**
 As shown above, you can access the shell with root access.
 
-### **2. Check Your Environment's Architecture**
+### **3. Check Your Environment's Architecture**
 Determine the architecture of your environment.<br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2ff62415-eec0-49f4-a951-e988243087a4)<br/><br/>
 ```sh
@@ -32,10 +33,10 @@ or
 uname -m
 ```
 For example, the output above indicates an x86 architecture.<br/>
-### **3. Push the ANGEL Script**<br/>
+### **4. Push the ANGEL Script**<br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2fb7ef9d-9d13-4a02-aaa8-e84c2e522cf3)<br/>
 Push the ANGEL scripts and the Frida server to your environment. You can download the Frida server from following link: <br/> https://github.com/frida/frida/releases <br/>
-### **4. Grant Permission**<br/>
+### **5. Grant Permission**<br/>
 ![grant permission](https://github.com/S3xyG4y/ANGEL/assets/55012702/17bdbbc7-6103-4941-8814-4b1e0b9ba009)<br/><br/>
 
 ## **Disconnecting from the ADB Session:** <br/>
