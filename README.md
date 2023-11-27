@@ -80,9 +80,10 @@ sed -i 's/\r$//' [yourfilename]
 
 (Detailed explanation is needed regarding the license and script)
 ## Requirements
-The Minimum requirement for this project is adb.
-So, if you just want adb not whole Android Studio, you can download Android SDK Platform-Tools from Google (link: [https://developer.android.com/studio/releases/platform-tools?hl=ko](https://developer.android.com/studio/releases/platform-tools))
-Download it then unzip it on your desired path then set adb with Environment Variable then use it!
+The primary requirement for this project is ADB (Android Debug Bridge). If you need only ADB without the entire Android Studio suite, you can download the Android SDK Platform-Tools from Google. This package includes ADB and other essential tools.
+
+Download link: [Android SDK Platform-Tools](https://developer.android.com/studio/releases/platform-tools)
+After downloading, unzip the package to your desired location and set up the ADB path in your system's Environment Variables. This will enable you to use ADB from the command line or terminal.
 
 ## License
 Currently, Our Project uses MIT License
