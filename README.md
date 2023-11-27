@@ -5,12 +5,12 @@ ANGEL is a shell script designed for collecting various information from Android
 To test ANGEL in a virtual environment, follow these steps:
 
 ### **1-1) Using Nox Player**
-![run](https://github.com/S3xyG4y/ANGEL/assets/55012702/11663704-1c85-41bb-986d-8a6f93b704e0)
-press keyboard's windows key button and r button will pops up run.exe type sysdml.cpl
-![sysdm cpl image](https://github.com/S3xyG4y/ANGEL/assets/55012702/8c49a506-a5c6-4190-8c72-d874d68ef50e)
-you can see system properties then get to the Advance tab
-![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/68f73d4f-a4dd-405a-b4d4-b11e58586cee)
-when you reached advanced tab press Environment Variables
+![run](https://github.com/S3xyG4y/ANGEL/assets/55012702/11663704-1c85-41bb-986d-8a6f93b704e0)<br/>
+press keyboard's windows key button and r button will pops up run.exe type sysdml.cpl<br/><br/>
+![sysdm cpl image](https://github.com/S3xyG4y/ANGEL/assets/55012702/8c49a506-a5c6-4190-8c72-d874d68ef50e)<br/>
+you can see system properties then get to the Advance tab<br/><br/>
+![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/68f73d4f-a4dd-405a-b4d4-b11e58586cee)<br/>
+when you reached advanced tab press Environment Variables<br/><br/>
 1) **Enable Root Access:** Ensure that the option to get Root privilege is enabled in Nox Player.<br/><br/>
 ![Nox-Root](https://github.com/S3xyG4y/ANGEL/assets/55012702/5655ff56-375b-4202-b507-c6d5375cbd2a)<br/>
 2) **Connect Your Nox Player:** Establish a connection with your Nox player.<br/><br/>
