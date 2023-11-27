@@ -1,6 +1,15 @@
 # **ANGEL: Android Data Collection Script**
 ANGEL is a script designed to automate the collection of essential data from Android devices.
 
+## **ANGEL Introduction** <br/><br/>
+ANGEL is an advanced script designed to automate the collection of essential data from Android devices, streamlining the process of digital forensics and data analysis.
+
+## **Purpose and Use Cases** <br/><br/>
+Developed as part of a cybersecurity project, ANGEL serves as a crucial tool for professionals in digital forensics, providing a fast and efficient way to gather necessary data from Android devices. It's particularly useful for scenarios involving security analysis, data recovery, and educational purposes
+
+## **Key Features** <br/><br/>
+Key features of ANGEL include automated data extraction, compatibility with a wide range of Android devices, and user-friendly operation, ensuring that even those with minimal technical expertise can effectively utilize the tool
+
 ## **To use ANGEL, follow these steps:...** <br/><br/>
 To test ANGEL in a virtual environment, follow these steps:
 
@@ -79,14 +88,19 @@ sed -i 's/\r$//' [yourfilename]
 ```
 
 ## Requirements
-The primary requirement for this project is ADB (Android Debug Bridge). If you need only ADB without the entire Android Studio suite, you can download the Android SDK Platform-Tools from Google. This package includes ADB and other essential tools.
+The primary requirement for this project is ADB (Android Debug Bridge). If you only need ADB without the full Android Studio suite, you can download the Android SDK Platform-Tools from Google. This package includes ADB and other essential tools.
 
 - Download link: [Android SDK Platform-Tools](https://developer.android.com/studio/releases/platform-tools)
-After downloading, unzip the package to your desired location and set up the ADB path in your system's Environment Variables. This will enable you to use ADB from the command line or terminal.
+
+After downloading, unzip the package to your desired location and set up the ADB path in your system's Environment Variables to use ADB from the command line or terminal.
+
+## Usage
+
+Ensure that the steps are clearly numbered or bulleted for easy following.
+Check for any technical jargon that might be unclear to a general audience and clarify or simplify as needed.
 
 ## License
 Currently, Our Project uses MIT License
 
 ## Contributing
-
-Please read [CONTRIBUTING.md](https://github.com/S3xyG4y/ANGEL/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+We welcome contributions to ANGEL! If you're interested in contributing, please see our [CONTRIBUTING.md](https://github.com/S3xyG4y/ANGEL/blob/main/CONTRIBUTING.md) for more information on how to get started
