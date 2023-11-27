@@ -6,7 +6,7 @@ To test ANGEL in a virtual environment, follow these steps:
 
 ### **1) set Environment variable for adb**
 ![run](https://github.com/S3xyG4y/ANGEL/assets/55012702/11663704-1c85-41bb-986d-8a6f93b704e0)<br/>
-press keyboard's windows key button and r button will pops up run.exe type sysdml.cpl<br/><br/>
+press keyboard's "windows key" button and "r" button will pops up run.exe type sysdml.cpl<br/><br/>
 ![sysdm cpl image](https://github.com/S3xyG4y/ANGEL/assets/55012702/8c49a506-a5c6-4190-8c72-d874d68ef50e)<br/>
 you can see system properties then get to the Advance tab<br/><br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/68f73d4f-a4dd-405a-b4d4-b11e58586cee)<br/>
