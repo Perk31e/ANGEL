@@ -78,7 +78,6 @@ If you encounter issues where characters appear shattered after executing Androi
 sed -i 's/\r$//' [yourfilename]
 ```
 
-(Detailed explanation is needed regarding the license and script)
 ## Requirements
 The primary requirement for this project is ADB (Android Debug Bridge). If you need only ADB without the entire Android Studio suite, you can download the Android SDK Platform-Tools from Google. This package includes ADB and other essential tools.
 
