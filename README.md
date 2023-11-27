@@ -82,7 +82,7 @@ sed -i 's/\r$//' [yourfilename]
 ## Requirements
 The primary requirement for this project is ADB (Android Debug Bridge). If you need only ADB without the entire Android Studio suite, you can download the Android SDK Platform-Tools from Google. This package includes ADB and other essential tools.
 
-Download link: [Android SDK Platform-Tools](https://developer.android.com/studio/releases/platform-tools)
+- Download link: [Android SDK Platform-Tools](https://developer.android.com/studio/releases/platform-tools)
 After downloading, unzip the package to your desired location and set up the ADB path in your system's Environment Variables. This will enable you to use ADB from the command line or terminal.
 
 ## License
