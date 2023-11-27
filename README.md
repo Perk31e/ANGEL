@@ -2,7 +2,7 @@
 ANGEL is a script designed to automate the collection of essential data from Android devices.
 
 ## **ANGEL Introduction** <br/><br/>
-ANGEL is an advanced script designed to automate the collection of essential data from Android devices, streamlining the process of digital forensics and data analysis.
+ANGEL is a powerful script designed for Android devices, aimed at automating the collection of essential data. This tool simplifies the process of gathering critical information, making it invaluable for developers, testers, and forensic analysts.
 
 ## **Purpose and Use Cases** <br/><br/>
 Developed as part of a cybersecurity project, ANGEL serves as a crucial tool for professionals in digital forensics, providing a fast and efficient way to gather necessary data from Android devices. It's particularly useful for scenarios involving security analysis, data recovery, and educational purposes
@@ -103,4 +103,4 @@ Check for any technical jargon that might be unclear to a general audience and c
 Currently, Our Project uses MIT License
 
 ## Contributing
-We welcome contributions to ANGEL! If you're interested in contributing, please see our [CONTRIBUTING.md](https://github.com/S3xyG4y/ANGEL/blob/main/CONTRIBUTING.md) for more information on how to get started
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. For detailed guidelines, please refer to our [CONTRIBUTING.md](https://github.com/S3xyG4y/ANGEL/blob/main/CONTRIBUTING.md).
