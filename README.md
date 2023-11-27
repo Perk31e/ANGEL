@@ -86,6 +86,7 @@ If you encounter issues where characters appear shattered after executing Androi
 ```sh
 sed -i 's/\r$//' [yourfilename]
 ```
+(Note: Since we've set the document format to LF in .gitattributes, related issues are unlikely to occur. However, this information is provided just in case.)<br/>
 
 ## Requirements
 The primary requirement for this project is ADB (Android Debug Bridge). If you only need ADB without the full Android Studio suite, you can download the Android SDK Platform-Tools from Google. This package includes ADB and other essential tools.
