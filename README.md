@@ -1,7 +1,7 @@
 # **ANGEL: Android Data Collection Script**
-ANGEL is a shell script designed for collecting various information from Android devices.
+ANGEL is a script designed to automate the collection of essential data from Android devices.
 
-## **Testing in a Virtual Environment** <br/><br/>
+## **To use ANGEL, follow these steps:...** <br/><br/>
 To test ANGEL in a virtual environment, follow these steps:
 
 ### **1. Set Environment variable for adb**
@@ -79,7 +79,13 @@ sed -i 's/\r$//' [yourfilename]
 ```
 
 (Detailed explanation is needed regarding the license and script)
+## Requirements
+The Minimum requirement for this project is adb.
+So, if you just want adb not whole Android Studio, you can download Android SDK Platform-Tools from Google (link: [https://developer.android.com/studio/releases/platform-tools?hl=ko](https://developer.android.com/studio/releases/platform-tools))
+Download it then unzip it on your desired path then set adb with Environment Variable then use it!
 
+## License
+Currently, Our Project uses MIT License
 
 ## Contributing
 
