@@ -27,6 +27,19 @@ if you followed all step described above run adb on cmd if your terminal already
 3) **Execute Shell:** Access the shell with root privileges.<br/><br/>
 ![shell access](https://github.com/S3xyG4y/ANGEL/assets/55012702/23b243e6-aa76-48f6-a033-9aa610b6065a)<br/>
 ### **2-2) Using Android Studio**
+1) **Open avd:** Open Android Virtual Device<br/><br/>
+![open avd](https://github.com/S3xyG4y/ANGEL/assets/55012702/2cdfc489-7d34-4806-b819-78a04c53943a)<br/>
+2) **Select Hardware:** Select Hardware which has Play Store mark<br/><br/>
+![create device](https://github.com/S3xyG4y/ANGEL/assets/55012702/4d55cb4b-3dc8-48b0-a29b-c6aa2af4df29)<br/>
+3) **Select System Image:** Select System Image which has Target's "~~~ Google APIs"<br/><br/>
+![select system image](https://github.com/S3xyG4y/ANGEL/assets/55012702/2481fc83-301e-41d5-9fd9-751e2a5a0b8b)<br/>
+q) why should i choose Target's Google API -> a) Because we need root access so the virtual device already rooted status<br/><br/>
+4) **type adb devices:** make sure you should type adb devices before execute adb shell<br/><br/>
+![adb devices](https://github.com/S3xyG4y/ANGEL/assets/55012702/2586c76a-6101-4c08-9d82-839e331f64f1)<br/>
+5) **type adb root:** now get root access<br/><br/>
+![adb root](https://github.com/S3xyG4y/ANGEL/assets/55012702/78d697d9-d8c0-4c18-a75a-4b5c9622557c)<br/>
+6) **type adb shell:** now you got access to Android shell<br/><br/>
+![adb shell](https://github.com/S3xyG4y/ANGEL/assets/55012702/15480391-4cd9-43f1-8ff5-74edf3a3273a)<br/>
 As shown above, you can access the shell with root access.
 
 ### **3. Check Your Environment's Architecture**
