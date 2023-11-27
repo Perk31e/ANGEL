@@ -11,6 +11,10 @@ press keyboard's "windows key" button and "r" button will pops up run.exe type s
 you can see system properties then get to the Advance tab<br/><br/>
 ![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/68f73d4f-a4dd-405a-b4d4-b11e58586cee)<br/>
 when you reached advanced tab press Environment Variables<br/><br/>
+![sysdmcpl path](https://github.com/S3xyG4y/ANGEL/assets/55012702/643bb842-592c-4b8f-8040-e4d4def2ba08)<br/>
+now select System variables's Path<br/><br/>
+![image](https://github.com/S3xyG4y/ANGEL/assets/55012702/9ba154a5-e19f-4552-8a63-8967f6c5387a)<br/>
+add your adb path ex) "C:\Users\yourusername\AppData\Local\Android\Sdk\platform-tools"<br/><br/>
 ### **2-1) Using Nox Player**
 1) **Enable Root Access:** Ensure that the option to get Root privilege is enabled in Nox Player.<br/><br/>
 ![Nox-Root](https://github.com/S3xyG4y/ANGEL/assets/55012702/5655ff56-375b-4202-b507-c6d5375cbd2a)<br/>
