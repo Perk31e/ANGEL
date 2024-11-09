@@ -19,7 +19,7 @@ a branch with a descriptive name.
 A good branch name would be (where issue #10 is the ticket you're working on):
 
 ```sh
-git checkout -b 010-add-calculator-function
+git checkout -b 010-add-script-function
 ```
 
 ### Get the test suite running
